@@ -56,6 +56,19 @@ Get-ChildItem .\roles\ -Directory
 
 You should see the `monolithprojects.github_actions_runner` role (or a folder named for the role) installed.
 
+## Run the playbook (local install)
+
+To run the self-hosted runner playbook locally (on the host machine), you can run the following command from the `homelab-hosted-gh-runner` folder. This runs the playbook against localhost using the local connection and will prompt for the privilege escalation password:
+
+```powershell
+ansible-playbook ./self-hosted-runner.yml -i localhost, -c local --ask-become-pass
+```
+
+Notes:
+- Run this in PowerShell or inside WSL (recommended) if Ansible is installed there.
+- The trailing comma after `localhost,` is required when using an inventory inline like this.
+
+
 ## Notes & troubleshooting
 
 - The included `requirements.yml` pins the role to version `1.26.0` and references the role source repository. You can edit `requirements.yml` to change versions or add more roles.

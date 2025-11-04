@@ -1,0 +1,11 @@
+runnerversion: "2.329.0"
+runnername: "{{ ansible_facts.hostname }}"
+runneruser: "{{ lookup('env', 'USER') }}"
+runnerdir: "/home/gauravpande/homelab-gh-runner"
+runners_in_same_repo: false # Set to false when provisioning runners for more than one repository within single play
+githubaccount: iamgp21
+pat: "{{ lookup('env', 'PERSONAL_ACCESS_TOKEN') }}"
+state: "absent" # State in which the runner service will be after the role is done (started, stopped, absent)
+reinstallrunner: false
+repo: "homelab-hosted-gh-runner"
+labels: ["homelab"]

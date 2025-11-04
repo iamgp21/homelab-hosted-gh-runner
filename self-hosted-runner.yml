@@ -2,18 +2,21 @@
 - name: GitHub Actions Runner
   hosts: all
   become: yes
-  vars:
-    - runner_version: "2.329.0"
-    - runner_name: "{{ ansible_facts.hostname }}"
-    - runner_user: "{{ lookup('env', 'USER') }}"
-    - runner_dir: "/home/gauravpande/homelab-gh-runner"
-    - all_runners_in_same_repo: false # Set to false when provisioning runners for more than one repository within single play
-    - github_account: "iamgp21"
-    - github_repo: "homelab-hosted-gh-runner"
-    - access_token: "{{ lookup('env', 'PERSONAL_ACCESS_TOKEN') }}" 
-    - runner_state: "started"
-    - reinstall_runner: false
-    - runner_labels:
-        - homelab
-  roles:
-    - role: monolithprojects.github_actions_runner
+  vars_files:
+    - vars/main.yml  
+
+  tasks:
+    - include_role:
+        name: monolithprojects.github_actions_runner
+      vars:
+        github_repo: "{{ repo }}"
+        runner_labels: "{{ labels }}"
+        runner_version: "{{ runnerversion }}"
+        runner_name: "{{ runnername }}"
+        runner_user: "{{ runneruser }}"
+        runner_dir: "{{ runnerdir }}"
+        all_runners_in_same_repo: "{{ runners_in_same_repo }}" # Set to false when provisioning runners for more than one repository within single play
+        github_account: "{{ githubaccount }}"
+        access_token: "{{ pat }}"
+        runner_state: "{{ state }}"
+        reinstall_runner: "{{ reinstallrunner }}"
