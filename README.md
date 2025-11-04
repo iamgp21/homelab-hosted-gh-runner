@@ -56,23 +56,6 @@ Get-ChildItem .\roles\ -Directory
 
 You should see the `monolithprojects.github_actions_runner` role (or a folder named for the role) installed.
 
-## Minimal usage example (playbook)
-
-Create a small playbook that uses the role. Example `playbook.yml`:
-
-```yaml
-- hosts: runners
-	become: true
-	roles:
-		- monolithprojects.github_actions_runner
-```
-
-Run the playbook (adjust inventory and connection method as needed):
-
-```powershell
-ansible-playbook -i inventory playbook.yml
-```
-
 ## Notes & troubleshooting
 
 - The included `requirements.yml` pins the role to version `1.26.0` and references the role source repository. You can edit `requirements.yml` to change versions or add more roles.
